@@ -11,8 +11,8 @@ $data = array();
 //);
 $data = array(
     "cols" => array(
-        array('label' => 'degree_type', 'type' => 'string'),
-        array('label' => 'number', 'type' => 'number')
+        array('id'=>'','label' => 'degree_type','pattern'=>'', 'type' => 'string'),
+        array('id'=>'','label' => 'number','pattern'=>'', 'type' => 'number')
     ),
     "rows" => array()
 );
@@ -21,8 +21,8 @@ while($row = mysqli_fetch_array($result))
     //echo "['".$row["degree_type"]."', ".$row["number"]."],";
     $data['rows'][] = array(
         'c' => array(
-            array('v' => $row['degree_type']),
-            array('v' => $row['number'])
+            array('v' => (int)$row['degree_type'], 'f'=>null),
+            array('v' => (int)$row['number'], 'f'=>null)
         )
         );
 };
@@ -31,5 +31,12 @@ return json_encode($data);
 echo '<pre>';
 print_r(get_data());
 echo'</pre>';
-
+// $file_name = date('d-m-Y') .'.json';
+//  if(file_put_contents($file_name, get_data())){
+//  	echo $file_name . 'file created';
+//  }
+//  else{
+//  	echo 'error';
+//  }
+// ?>
 
