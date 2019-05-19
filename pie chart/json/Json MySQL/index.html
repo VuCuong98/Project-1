@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Chart with Ajax and PHP</title>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Load Jquery -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Make the chart -->
+    <script type="text/javascript">
+
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var jsonData = $.ajax({
+              url: "getData.php",
+              dataType: "json", // type of data we're expecting from server
+              async: false // make true to avoid waiting for the request to be complete
+              });
+
+          // Create our data table out of JSON data loaded from server.
+          var data = new google.visualization.DataTable(jsonData);
+
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById('chart'));
+
+          var options = {
+              title: 'Monthly Shares of phpocean susbscribers - total of 759 user',
+              width: 800, 
+              height: 440,
+              pieHole: 0.4,
+            };
+
+          chart.draw(data, options);
+        };
+
+      </script>
+
+</head>
+<body>
+    <!--Div that will hold the chart-->
+    <div id="chart"></div>
+</body>
+</html>    
