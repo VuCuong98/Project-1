@@ -21,19 +21,18 @@
               url: "getData.php",
               dataType: "json", // type of data we're expecting from server
               async: false // make true to avoid waiting for the request to be complete
-              });
+              }).responseText;
 
           // Create our data table out of JSON data loaded from server.
           var data = new google.visualization.DataTable(jsonData);
+          
 
           // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.PieChart(document.getElementById('chart'));
+          var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
 
           var options = {
-              title: 'Monthly Shares of phpocean susbscribers - total of 759 user',
-              width: 800, 
-              height: 440,
-              pieHole: 0.4,
+              title: 'Percentage of Degree Type',
+              is3D:true,
             };
 
           chart.draw(data, options);
@@ -44,6 +43,6 @@
 </head>
 <body>
     <!--Div that will hold the chart-->
-    <div id="chart"></div>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
 </body>
 </html>    
